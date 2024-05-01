@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
 	<link rel="stylesheet" href="css/layout.css" />
 	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+	<link rel="stylesheet" href="plugin/chalkboard/style.css">
 
+	<link rel="stylesheet" href="plugin/reveal-pointer/pointer.css" />
 
 
     <script defer src="dist/fontawesome/all.min.js"></script>
@@ -324,6 +326,11 @@ Goal is to maximize accumulated reward
     -   Provide more efficient RL learning
 -   Recent advanced significantly improved RL sample efficiency 
 
+</div></script></section>
+
+<section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
 ### World Models
 #### Dreamer
 
@@ -427,7 +434,7 @@ Goal is to maximize accumulated reward
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### World Models
+### World Models - Dreamer
 #### Dreamer
 
 <img src="attachements/dreamerv3.png" alt="" style="width: 1000px; object-fit: fill">
@@ -480,36 +487,9 @@ Goal is to maximize accumulated reward
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-World Models
-
--   World models define the dynamics of the environment :
-    - t
--   In stochastic environments :
--   In deterministic environments: 
--   Model based RL uses this model to plan ahead
--   Usually in real world problems, the world model is hard to get accurately
--   A line of work tries to learn the model with the policy, and continue train in the model, while dreaming [schmidthuber,PlaNET, Dreamer v1,2,3] - producing trajectories using the model instead of the environment
--   possible benefit in unsupervised RL
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-Dreamer V3 review
-
--   A recent world model, solved challenging games in record time
--   By utilizing the model to generate trajectories, can learn from much less real environment interactions
--   SOTA results on ATARI100K benchmark
--   Based on an LSTM, with special discrete representation as a regularization
--   The policy is trained on the world model representation instead of the actual state
--   Showed many uses in other works (lexa and more)
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-Suggestion for further work
-
--   Our idea is instead of repopulating the replay buffer with exploration stage trajectories (with irrelevant exploration reward)
--   Learn a world model, and transfer it to the finetuning stage, while finetuning the reward model
--   No need to store large amounts of exploration data, also improving reward model can be more beneficial from task training
-</div></script></section></div>
+# Thank You!
+</div></script></section><section  data-markdown><script type="text/template">
+</script></section></div>
     </div>
 
     <script src="dist/reveal.js"></script>
@@ -523,6 +503,8 @@ Suggestion for further work
 	<script src="plugin/chart/chart.min.js"></script>
 	<script src="plugin/chart/plugin.js"></script>
 	<script src="plugin/customcontrols/plugin.js"></script>
+	<script src="plugin/chalkboard/plugin.js"></script>
+	<script src="plugin/reveal-pointer/pointer.js"></script>
 
     <script>
       function extend() {
@@ -578,6 +560,8 @@ Suggestion for further work
 		  RevealMermaid,
 		  RevealChart,
 		  RevealCustomControls,
+	      RevealPointer,
+		  RevealChalkboard, 
         ],
 
 
@@ -600,6 +584,14 @@ Suggestion for further work
 
 		customcontrols: {
 			controls: [
+				{ icon: '<i class="fa fa-pen-square"></i>',
+				title: 'Toggle chalkboard (B)',
+				action: 'RevealChalkboard.toggleChalkboard();'
+				},
+				{ icon: '<i class="fa fa-pen"></i>',
+				title: 'Toggle notes canvas (C)',
+				action: 'RevealChalkboard.toggleNotesCanvas();'
+				},
 			]
 		},
       };
