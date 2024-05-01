@@ -393,9 +393,9 @@ Goal is to maximize accumulated reward
 #### Setup
 
 <split even>
-<img src="attachements/baseline_diag.png" alt="" style="width: 350px; object-fit: fill">
+<img src="attachements/baseline_diag.png" alt="" style="width: 300px; object-fit: fill">
 
-<img src="attachements/buffer_aug_diag_v2.png" alt="" style="width: 350px; object-fit: fill">
+<img src="attachements/buffer_aug_diag_v2.png" alt="" style="width: 300px; object-fit: fill">
 
 </split>
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
@@ -418,7 +418,7 @@ Goal is to maximize accumulated reward
 
 ### World Models
 
--   Another opportunity to leverage the UEB:
+-   Another opportuinity to laverage the UEB:
     -   Train the world model using the UEB
     -   During fine-tuning:
         -   Continue WM fine-tuning, with the correct reward
@@ -427,56 +427,19 @@ Goal is to maximize accumulated reward
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### World Models
-#### Dreamer
-
-<img src="attachements/dreamerv3.png" alt="" style="width: 1000px; object-fit: fill">
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### Expert Demonstartions
-#### Setup
-<img src="attachements/expert-clipart-man_clipart2.png" alt="" style="width: 100px; object-fit: fill">
-
-
--   We want to further remove relience on online data aquisition.
--   We Propose to use few expert demonstrations 
--   given 4 expert demos, use 10K additional online data
-    -   (Instead of the 100K of URLB)
--   We test this setup using the methods descibed here
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
 ### Expert Demonstrations
-#### Experiments
 
--   Reward Model
-    -   Keep UEB and use the RM when sampling it
-    -   finetune the exploration policy 
--   MURLB
-    -   current SOTA on URLB using World model
-    -   during pre-training, train the world model
-    -   fine-tune the policy with the world model on the task
--   +Expert
-    -   initialize finetuing with 4 expert demos
-    -   Use the UEB during finetuning
-    -   discart the exploration policy
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+-   To further improve efficiency, we propose to use expert demonstrations
+-   We evaluate at 10K steps, in addition to 100K steps tested in URLB
 
-### Expert Demonstrations
-#### Results
-
--   We evaluate at 10K online steps
-
-| Task/Method    | Reward Model | MURLB | Reward Model+Expert | MURLB+Expert | MURLB+Expert+Actor |
-| -------------- | ------------ | ----- | ------------------- | ------------ | ------------------ |
-| Walker Walk    | 197          | 630   | 375                 | *903*          | 884                |
-| Walker Run     | 57           | 328   | 106                 | *559*          | 383                |
-| Walker Flip    | 210          | 607   | 285                 | *830*          | 771                |
-| Quadruped Walk | 90           | 339   | 402                 | 314          | *424*                |
-| Quadruped Run  | 103          | 200   | 412                 | 350          | *439*                |
-| Quadruped Jump | 122          | 449   | 630                 | 539          | *635*                |
+| Task/Method    | Pix Exorl | Reward Model | Reward Model++ | Stage 2 | Stage 2++ | MURLB+Expert+Actor(thesis) |
+| -------------- | --------- | ------------ | -------------- | ------- | --------- | -------------------------- |
+| Walker Walk    | 260       | 183          | 375            | 802     | 903       | 884                        |
+| Walker Run     | 121       | 87           | 106            | 399     | 559       | 383                        |
+| Walker Flip    | 207       | 111          | 285            | 622     | 830       | 771                        |
+| Quadruped Walk | 250       | 162          | 402            | 255     | 314       | 424                        |
+| Quadruped Run  | 279       | 279          | 412            | 191     | 350       | 439                        |
+| Quadruped Jump | 324       | 371          | 630            | 414     | 539       | 635                        |
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
