@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
 
     <title></title>
     <link rel="stylesheet" href="dist/reveal.css" />
@@ -99,11 +98,10 @@ Methods of unsupervised pre-training for fast multi-task adaptation in Reinforce
 ### Outline
 
 - Intro to RL
-- Preliminaries and notations
-- URLB
 - Exploration algorithms
-- World Models
-- Thesis contributions
+- Fast Task Adaptation Benchmarks: (URLB, ExORL)
+- Reward Model
+- DreamerMPC
 - Future work
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
@@ -137,10 +135,10 @@ Goal is to maximize accumulated reward
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### Reinforcment Learning
+### Reinforcement Learning
 #### Limitations
 
-- Cannot reuse models/data from similar environemnts
+- Cannot reuse models/data from similar environments
 	- Unlike foundational models 
         - CV: BYOL
         - NLP: GPT
@@ -149,32 +147,20 @@ Goal is to maximize accumulated reward
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### Reinforcment Learning
-#### Exploration vs Exploitation
+### What we propose?
 
--   Sparse reward environments is challanging for optimization
--   We can add an auxiliary reward to facilitate exploration
--   Penalize already visited states
-<img src="attachements/rl_ir.png" alt="" style="object-fit: scale-down">
-</div>
-
-<aside class="notes"><ul>
-<li>Problem with sparse  reward is that most trajectories get 0 reward</li>
-</ul>
-</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+#### Fast Task Adaptation
+- Introduce a novel approach to unsupervised data utilization
+- Significant improvement over previous SOTA (up to *1.7x* average improvement)
+- Propose a new benchmark that reduced required task data from 100K to 10K steps
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### Reinforcment Learning
-#### TV problem
+### What we propose?
 
-<img src="attachements/tvprob.gif" alt="" style="object-fit: scale-down">
-</div>
-
-<aside class="notes"><ul>
-<li>TV problem:</li>
-<li>The agent may encounter a TV producing endless noise and will be motivated to procrastinate and stay watching the TVthe exploration exploitation problem</li>
-</ul>
-</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+#### Fast Task Adaptation
+(exploration) (URLB100K) (ours 10K)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Preliminaries and notations
@@ -239,35 +225,36 @@ Goal is to maximize accumulated reward
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### Unsupervised Reinforcement Learning Benchmark 
-#### URLB
-- Many methods develop exploration strategies
-- Propose an unsupervised exploration stage to later help learning tasks later
-- The benchmark tries to establish a comparison of algorithms for transferring unsupervised exploration to specific tasks
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+### Reinforcment Learning
+#### Exploration vs Exploitation
+
+-   Sparse reward environments is challenging for optimization
+-   We can add an auxiliary reward to facilitate exploration
+-   Penalize already visited states
+<img src="attachements/rl_ir.png" alt="" style="object-fit: scale-down">
+</div>
+
+<aside class="notes"><ul>
+<li>Problem with sparse  reward is that most trajectories get 0 reward</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### URLB
+### Reinforcment Learning
+#### TV problem
 
--   Unsupervised learning pretraining stage - environment without any reward
--   Task fine-tuning stage - a set of tasks with a predefined reward
--   Using a number of steps in the pretraining stage, solve a specific task using as few steps as possible
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<img src="attachements/tvprob.gif" alt="" style="object-fit: scale-down">
+</div>
+
+<aside class="notes"><ul>
+<li>TV problem:</li>
+<li>The agent may encounter a TV producing endless noise and will be motivated to procrastinate and stay watching the TVthe exploration exploitation problem</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### URLB
-
--   The benchmark tests:
-    -   3 environments
-    -   4 tasks each
-    -   2 observation types for each (pixel and state) 
--   8 exploration algorithms are compared (we focus on top 2)
-
-<img src="attachements/urlb_tasks.png" alt="" style="width: 1000px; object-fit: fill">
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### ICM review
+### Exploration by Intrinsic Reward
+#### ICM review
 
 -   Intrinsic reward construction
 -   Predict state representation
@@ -318,62 +305,63 @@ Goal is to maximize accumulated reward
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### World Models
+### Fast Task Adaptation Benchmarks
 
--   Learn environment dynamics `$P(s',r|s,a)$` so we can:
-    -   Plan ahead
-    -   Generate additional data
-    -   Provide more efficient RL learning
--   Recent advanced significantly improved RL sample efficiency 
-
-</div></script></section>
-
-<section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### World Models
-#### Dreamer
-
-<img src="attachements/dreamerv3.png" alt="" style="width: 1000px; object-fit: fill">
+- A general approach for fast task adaptation is to incorporate extra task-agnostic data 
+- One approach describes a pre-training and fine-tuning process
+- Second approach is to utilize an auxiliary exploration data and treat is as an offline RL problem
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### Unsupervised Pretraining Setting
-
--   Pretraining stage: 
-    -   A policy is trained using an intrinsic reward for 2M steps.
-    -   The intrinsic reward is represented by the evaluated exploration algorithm.
--   Fine-tuning stage:
-    -   The pre-trained exploration policy is further fine-tuned using a only task reward.
--   Evaluation:
-    -   After 100K finetuning steps, the policy is tested on the target task.
-</div>
-
-<aside class="notes"><ul>
-<li>The exploration policy can learn more efficient representations</li>
-<li>As vector states representation is already minimal, there is not much to improve</li>
-<li>Pixel based observations on the other hand, are much less compact, and efficient encoders can be learned (some more references)</li>
-</ul>
-</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### Thesis Contributions
-#### Outline
-
--   URLB setup drawbacks
--   Exploration Buffer + Reward Model (RM)
--   World Models
--   Expert Demonstrations
+### Fast Task Adaptation Benchmarks
+#### URLB
+- pre-train a policy on unsupervised data, using only an exploration reward, for 2M steps
+- fine-tune the policy on the actual task, using 100K steps
+- The benchmark tries to establish a comparison of algorithms for transferring unsupervised exploration to specific tasks
+#### ExORL
+- collect unsupervised data, possibly directed by exploration (2-10M steps)
+- assuming a simple reward function, re-label the reward to be the target task reward
+- Solve the task using only the re-labeled dataset
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### Thesis Contributions
+### Fast Task Adaptation Benchmarks
+#### URLB
+
+-   The benchmark tests:
+    -   3 environments
+    -   4 tasks each
+    -   2 observation types for each (pixel and state) 
+-   8 exploration algorithms are compared (we focus on top 2)
+
+<img src="attachements/urlb_tasks.png" alt="" style="width: 1000px; object-fit: fill">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
+#### ExORL
+
+- The benchmark works on the same environments and tasks
+- Only skips state based observations and works only on pixels
+- Same exploration algorithms are used to collect the offline dataset
+- A few Offline RL algorithms are also compared
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
 #### URLB setup drawbacks
 
--   During pre-training, all the collected data is discarted.
+-   During pre-training, all the collected data is discarded.
 	-   We will refer to it as the Unsupervised Exploration Buffer (UEB)
 -   At the end of pre-training, the policy is trained to reach the horizon of explored data. (task dependant)
--   Given few demonstrations, we can dramatically reduce required task expirience.
+#### ExORL drawbacks
+- Assumes a simple reward function, which allows data re-labeling
+	- Not realistic in numerous applications
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
+#### Why not both?
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -409,14 +397,6 @@ Goal is to maximize accumulated reward
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Exploration Buffer + Reward Model
-#### States
-
-
-<img src="attachements/urlb_buffered_rm_states_bars.png" alt="" style="width: 1000px; object-fit: fill">
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### Exploration Buffer + Reward Model
 #### Pixels
 
 <img src="attachements/urlb_buffered_rm_pixels_bars.png" alt="" style="width: 1000px; object-fit: fill">
@@ -446,11 +426,11 @@ Goal is to maximize accumulated reward
 <img src="attachements/expert-clipart-man_clipart2.png" alt="" style="width: 100px; object-fit: fill">
 
 
--   We want to further remove relience on online data aquisition.
+-   We want to further remove reliance on online data acquisition.
 -   We Propose to use few expert demonstrations 
 -   given 4 expert demos, use 10K additional online data
     -   (Instead of the 100K of URLB)
--   We test this setup using the methods descibed here
+-   We test this setup using the methods described here
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -460,30 +440,47 @@ Goal is to maximize accumulated reward
 -   Reward Model
     -   Keep UEB and use the RM when sampling it
     -   finetune the exploration policy 
--   MURLB
+-   DreamerMPC (MURLB)
     -   current SOTA on URLB using World model
     -   during pre-training, train the world model
     -   fine-tune the policy with the world model on the task
--   +Expert
-    -   initialize finetuing with 4 expert demos
+-   DreamerMPC+
+	-  Based on MURLB
     -   Use the UEB during finetuning
-    -   discart the exploration policy
+    -   optionally initialize finetuing with 4 expert demos
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Expert Demonstrations
-#### Results
+#### 100K vs Reward Model
 
--   We evaluate at 10K online steps
+-   We evaluate at 10K online steps VS 100K on URLB baseline
 
-| Task/Method    | Reward Model | MURLB | Reward Model+Expert | MURLB+Expert | MURLB+Expert+Actor |
-| -------------- | ------------ | ----- | ------------------- | ------------ | ------------------ |
-| Walker Walk    | 197          | 630   | 375                 | *903*        | 884                |
-| Walker Run     | 57           | 328   | 106                 | *559*        | 383                |
-| Walker Flip    | 210          | 607   | 285                 | *830*        | 771                |
-| Quadruped Walk | 90           | 339   | 402                 | 314          | *424*              |
-| Quadruped Run  | 103          | 200   | 412                 | 350          | *439*              |
-| Quadruped Jump | 122          | 449   | 630                 | 539          | *635*              |
+| Task/Method | URLB 100K | Reward Model | Reward Model+Expert |
+| ----------- | --------- | ------------ | ------------------- |
+| Walker Walk | 141       | 197          | 375                 |
+| Walker Run  | 41        | 57           | 106                 |
+| Walker Flip | 81        | 210          | 285                 |
+| Quad Walk   | 151       | 90           | 402                 |
+| Quad Run    | 156       | 103          | 412                 |
+| Quadr Jump  | 278       | 122          | 630                 |
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Expert Demonstrations
+#### URLB SOTA (DreamerMPC) vs DreamerMPC+
+
+-   We evaluate at 10K online steps (Average to 2 seeds)
+
+| Task/Method        | DreamerMPC | DreamerMPC+ | DreamerMPC+Expert |
+| ------------------ | ---------- | ----------- | ----------------- |
+| Walker Walk        | 630        | 896         | *918*             |
+| Walker Run         | 328        | *594*       | 585               |
+| Walker Flip        | 607        | 841         | *889*             |
+| Quadruped Walk     | 339        | 401         | *540*             |
+| Quadruped Run      | 200        | 324         | *446*             |
+| Quadruped Jump     | 449        | 539         | *915*             |
+| Normalized Average | 1.0        | 1.4         | *1.68*            |
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -605,8 +602,6 @@ Goal is to maximize accumulated reward
     <script>
       Reveal.initialize(options);
     </script>
-	<script src="socket.io/socket.io.js"></script>
-	<script src="node_modules/reveal-notes-server/client.js"></script>
   </body>
 
   <!-- created with Advanced Slides -->
