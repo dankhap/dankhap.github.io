@@ -152,7 +152,7 @@ Goal is to maximize accumulated reward
 #### Fast Task Adaptation
 - Introduce a novel approach to unsupervised data utilization
 - Significant improvement over previous SOTA (up to *1.7x* average improvement)
-- Propose a new benchmark that reduced required task data from 100K to 10K steps
+- Propose a new benchmark that reduced required task data from 100K to 10K steps and tests incorporation of few demonstrations
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -168,6 +168,7 @@ Goal is to maximize accumulated reward
 - MDP definitions
 - RL objective
 - Q-Learning
+- Offline RL
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -177,7 +178,7 @@ Goal is to maximize accumulated reward
 - MDP = < S, T, A, R >
 - S = state
 - T = transition `$T: S\times A \rightarrow S$`
-- A = action (real or discrete)
+- A = action (continuous or discrete)
 - R = reward `$R: S\times A \rightarrow \mathbb{R}$`
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
@@ -225,6 +226,14 @@ Goal is to maximize accumulated reward
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
+### Offline RL
+
+- A sub-field in RL where we constraint the agent in learning a policy without interacting with an environment.
+- The use of an isolated dataset brings many challenges for good RL optimization
+- considered a pre-requisite for RL adoption in many fields.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
 ### Reinforcment Learning
 #### Exploration vs Exploitation
 
@@ -250,7 +259,7 @@ Goal is to maximize accumulated reward
 <li>TV problem:</li>
 <li>The agent may encounter a TV producing endless noise and will be motivated to procrastinate and stay watching the TVthe exploration exploitation problem</li>
 </ul>
-</aside></script></section><section  data-markdown><script type="text/template"></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Exploration by Intrinsic Reward
@@ -318,6 +327,10 @@ Goal is to maximize accumulated reward
 - pre-train a policy on unsupervised data, using only an exploration reward, for 2M steps
 - fine-tune the policy on the actual task, using 100K steps
 - The benchmark tries to establish a comparison of algorithms for transferring unsupervised exploration to specific tasks
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
 #### ExORL
 - collect unsupervised data, possibly directed by exploration (2-10M steps)
 - assuming a simple reward function, re-label the reward to be the target task reward
@@ -354,6 +367,10 @@ Goal is to maximize accumulated reward
 -   During pre-training, all the collected data is discarded.
 	-   We will refer to it as the Unsupervised Exploration Buffer (UEB)
 -   At the end of pre-training, the policy is trained to reach the horizon of explored data. (task dependant)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
 #### ExORL drawbacks
 - Assumes a simple reward function, which allows data re-labeling
 	- Not realistic in numerous applications
@@ -362,6 +379,7 @@ Goal is to maximize accumulated reward
 
 ### Fast Task Adaptation Benchmarks
 #### Why not both?
+- Incorporate offline data during task fine-tuning!
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -411,6 +429,7 @@ Goal is to maximize accumulated reward
         -   Continue WM fine-tuning, with the correct reward
         -   Train a policy using DreamerV3
 -   Was later demonstrated in another work
+	- Current SOTA on URLB, we refer to as DreamerMPC
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -447,7 +466,7 @@ Goal is to maximize accumulated reward
 -   DreamerMPC+
 	-  Based on MURLB
     -   Use the UEB during finetuning
-    -   optionally initialize finetuing with 4 expert demos
+	- Additional OfflineRL considerations
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -455,15 +474,9 @@ Goal is to maximize accumulated reward
 #### 100K vs Reward Model
 
 -   We evaluate at 10K online steps VS 100K on URLB baseline
-
-| Task/Method | URLB 100K | Reward Model | Reward Model+Expert |
-| ----------- | --------- | ------------ | ------------------- |
-| Walker Walk | 141       | 197          | 375                 |
-| Walker Run  | 41        | 57           | 106                 |
-| Walker Flip | 81        | 210          | 285                 |
-| Quad Walk   | 151       | 90           | 402                 |
-| Quad Run    | 156       | 103          | 412                 |
-| Quadr Jump  | 278       | 122          | 630                 |
+	- 4 Demos - 2K from the 10K steps are expert demonstrations
+	
+<img src="attachements/paper_bars.png" alt="" style="object-fit: scale-down">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -472,15 +485,15 @@ Goal is to maximize accumulated reward
 
 -   We evaluate at 10K online steps (Average to 2 seeds)
 
-| Task/Method        | DreamerMPC | DreamerMPC+ | DreamerMPC+Expert |
-| ------------------ | ---------- | ----------- | ----------------- |
-| Walker Walk        | 630        | 896         | *918*             |
-| Walker Run         | 328        | *594*       | 585               |
-| Walker Flip        | 607        | 841         | *889*             |
-| Quadruped Walk     | 339        | 401         | *540*             |
-| Quadruped Run      | 200        | 324         | *446*             |
-| Quadruped Jump     | 449        | 539         | *915*             |
-| Normalized Average | 1.0        | 1.4         | *1.68*            |
+| Task/Method        | DreamerMPC | DreamerMPC+ | DreamerMPC+Exp |
+| ------------------ | ---------- | ----------- | -------------- |
+| Walker Walk        | 630        | 896         | *918*          |
+| Walker Run         | 328        | *594*       | 585            |
+| Walker Flip        | 607        | 841         | *889*          |
+| Quadruped Walk     | 339        | 401         | *540*          |
+| Quadruped Run      | 200        | 324         | *446*          |
+| Quadruped Jump     | 449        | 539         | *915*          |
+| Normalized Average | 1.0        | 1.4         | *1.68*         |
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
