@@ -159,7 +159,8 @@ Goal is to maximize accumulated reward
 ### What we propose?
 
 #### Fast Task Adaptation
-(exploration) (URLB100K) (ours 10K)
+Pre-Training - URLB SOTA - Ours 10K
+<img src="attachements/concatenated_3.gif" alt="" style="width: 800px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -317,8 +318,8 @@ Goal is to maximize accumulated reward
 ### Fast Task Adaptation Benchmarks
 
 - A general approach for fast task adaptation is to incorporate extra task-agnostic data 
-- One approach describes a pre-training and fine-tuning process
-- Second approach is to utilize an auxiliary exploration data and treat is as an offline RL problem
+- One approach describes a pre-training and fine-tuning process - URLB
+- Second approach is to utilize an auxiliary exploration data and treat is as an offline RL problem - ExORL
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -327,14 +328,6 @@ Goal is to maximize accumulated reward
 - pre-train a policy on unsupervised data, using only an exploration reward, for 2M steps
 - fine-tune the policy on the actual task, using 100K steps
 - The benchmark tries to establish a comparison of algorithms for transferring unsupervised exploration to specific tasks
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### Fast Task Adaptation Benchmarks
-#### ExORL
-- collect unsupervised data, possibly directed by exploration (2-10M steps)
-- assuming a simple reward function, re-label the reward to be the target task reward
-- Solve the task using only the re-labeled dataset
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -352,21 +345,36 @@ Goal is to maximize accumulated reward
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
+#### URLB setup drawbacks
+
+-   During pre-training, all the collected data is discarded.
+	-   We will refer to it as the Unsupervised Exploration Buffer (UEB)
+-   At the end of pre-training, the policy is trained to reach the horizon of explored data. (task dependent)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
+#### URLB
+
+<img src="attachements/1708853821_grim.png" alt="" style="object-fit: scale-down">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
+#### ExORL
+- collect unsupervised data, possibly directed by exploration (2-10M steps)
+- assuming a simple reward function, re-label the reward to be the target task reward
+- Solve the task using only the re-labeled dataset
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
 #### ExORL
 
 - The benchmark works on the same environments and tasks
 - Only skips state based observations and works only on pixels
 - Same exploration algorithms are used to collect the offline dataset
 - A few Offline RL algorithms are also compared
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### Fast Task Adaptation Benchmarks
-#### URLB setup drawbacks
-
--   During pre-training, all the collected data is discarded.
-	-   We will refer to it as the Unsupervised Exploration Buffer (UEB)
--   At the end of pre-training, the policy is trained to reach the horizon of explored data. (task dependant)
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -616,6 +624,8 @@ Goal is to maximize accumulated reward
     <script>
       Reveal.initialize(options);
     </script>
+	<script src="socket.io/socket.io.js"></script>
+	<script src="node_modules/reveal-notes-server/client.js"></script>
   </body>
 
   <!-- created with Advanced Slides -->
