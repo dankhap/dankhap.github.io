@@ -345,6 +345,13 @@ Pre-Training - URLB SOTA - Ours 10K
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
+#### URLB
+
+<img src="attachements/1708853821_grim.png" alt="" style="object-fit: scale-down">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
 #### URLB setup drawbacks
 
 -   During pre-training, all the collected data is discarded.
@@ -354,16 +361,9 @@ Pre-Training - URLB SOTA - Ours 10K
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
-#### URLB
-
-<img src="attachements/1708853821_grim.png" alt="" style="object-fit: scale-down">
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### Fast Task Adaptation Benchmarks
 #### ExORL
-- collect unsupervised data, possibly directed by exploration (2-10M steps)
-- assuming a simple reward function, re-label the reward to be the target task reward
+- Collect unsupervised data, possibly directed by exploration (2-10M steps)
+- Assuming a simple reward function, re-label the reward to be the target task reward
 - Solve the task using only the re-labeled dataset
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
@@ -467,11 +467,11 @@ Pre-Training - URLB SOTA - Ours 10K
 
 -   Reward Model
     -   Keep UEB and use the RM when sampling it
-    -   finetune the exploration policy 
+    -   Finetune the exploration policy 
 -   DreamerMPC (MURLB)
-    -   current SOTA on URLB using World model
-    -   during pre-training, train the world model
-    -   fine-tune the policy with the world model on the task
+    -   Current SOTA on URLB using World model
+    -   During pre-training, train the world model
+    -   Fine-tune the policy with the world model on the task
 -   DreamerMPC+
 	-  Based on MURLB
     -   Use the UEB during finetuning
