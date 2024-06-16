@@ -87,13 +87,16 @@
   <body>
     <div class="reveal">
       <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### Unsupervised Reinforcement Learning for Fast Novel Task Adaptation 
+### *Unsupervised Reinforcement Learning for Fast Novel Task Adaptation* <br ></br> 
+#### And the accompanying paper: A Demonstration is Worth a Million Exploration Steps?
 
-Methods of unsupervised pre-training for fast multi-task adaptation in Reinforcement Learning (RL)
+<br ></br>
+Daniel Khapun <br ></br>
+Supervised by Dr. Dan Rosenbaum
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Outline
 
@@ -104,7 +107,7 @@ Methods of unsupervised pre-training for fast multi-task adaptation in Reinforce
 - DreamerMPC
 - Future work
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Intro to RL
 
@@ -112,57 +115,56 @@ Methods of unsupervised pre-training for fast multi-task adaptation in Reinforce
 
 Goal is to maximize accumulated reward
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcment Learning
 #### Achivements 
 
 <img src="attachements/Atari.png" alt="" style="object-fit: scale-down">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcment Learning
 #### Achivements 
 
 <img src="attachements/gettyimages-515343878.webp" alt="" style="object-fit: scale-down">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcment Learning
 #### Achivements 
 
 <img src="attachements/chat-gpt-header.jpg" alt="" style="object-fit: scale-down">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcement Learning
 #### Limitations
 
-- Cannot reuse models/data from similar environments
-	- Unlike foundational models 
-        - CV: BYOL
-        - NLP: GPT
+
+- It's data hungry
+	- Cannot reuse models/data from similar environments
 - Hard optimization - distributional shift during training
 - Hard to specify a reward function
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### What we propose?
 
 #### Fast Task Adaptation
-- Introduce a novel approach to unsupervised data utilization
-- Significant improvement over previous SOTA (up to *1.7x* average improvement)
+- Introduce a novel approach to unsupervised data utilization <br ></br>
+- Significant improvement over previous SOTA (up to *1.7x* average improvement) <br ></br>
 - Propose a new benchmark that reduced required task data from 100K to 10K steps and tests incorporation of few demonstrations
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### What we propose?
 
 #### Fast Task Adaptation
-Pre-Training - URLB SOTA - Ours 10K
-<img src="attachements/concatenated_3.gif" alt="" style="width: 800px; object-fit: fill">
+Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
+<img src="attachements/slow_medium_fast.gif" alt="" style="width: 800px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Preliminaries and notations
 #### Outline
@@ -171,7 +173,7 @@ Pre-Training - URLB SOTA - Ours 10K
 - Q-Learning
 - Offline RL
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Markov Decision Process
 #### MDP
@@ -182,7 +184,7 @@ Pre-Training - URLB SOTA - Ours 10K
 - A = action (continuous or discrete)
 - R = reward `$R: S\times A \rightarrow \mathbb{R}$`
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### RL objective
 
@@ -193,7 +195,7 @@ Pre-Training - URLB SOTA - Ours 10K
 -   Using these definitions we can define the optimal policy as: 
     - `$\pi(s)=argmax_a Q^\pi(s,a)$`
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Q-Learning
 
@@ -211,7 +213,7 @@ Pre-Training - URLB SOTA - Ours 10K
 </li>
 </ul>
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Deep Deterministic Policy Gradient
 #### (DDPG)
@@ -225,15 +227,7 @@ Pre-Training - URLB SOTA - Ours 10K
 <li>Emphasis on two learned networks, <code>$Q_\phi$</code> and <code>$\pi_\theta$</code></li>
 </ul>
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### Offline RL
-
-- A sub-field in RL where we constraint the agent in learning a policy without interacting with an environment.
-- The use of an isolated dataset brings many challenges for good RL optimization
-- considered a pre-requisite for RL adoption in many fields.
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcment Learning
 #### Exploration vs Exploitation
@@ -248,7 +242,7 @@ Pre-Training - URLB SOTA - Ours 10K
 <li>Problem with sparse  reward is that most trajectories get 0 reward</li>
 </ul>
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcment Learning
 #### TV problem
@@ -261,7 +255,7 @@ Pre-Training - URLB SOTA - Ours 10K
 <li>The agent may encounter a TV producing endless noise and will be motivated to procrastinate and stay watching the TVthe exploration exploitation problem</li>
 </ul>
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Exploration by Intrinsic Reward
 #### ICM review
@@ -273,63 +267,59 @@ Pre-Training - URLB SOTA - Ours 10K
 
 <img src="attachements/icm.jpg" alt="" style="width: 1000px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### RND review
-
--   Reward definition: `$||\hat{f}(s_{t+1})-f(s_{t+1})||$`
--   Predict random representation
--   Optimize   such that we minimize the reward
--   This objective is also the intrinsic reward
--   First better then average human performance on ATARI Montezuma game
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### RND review
-<img src="attachements/rnd.png" alt="" style="width: 500px; object-fit: fill">
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### RND review
 
 <img src="attachements/rnd_results.png" alt="" style="width: 1000px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### RE3 review
-
--   Penalize states by k-NN density in random representation
--   Optimizes state covarage by entropy maximization
--   State Entropy is esitmated by `$\log(y_i - y_i^{k-NN} + 1)$`
-</div>
-
-<aside class="notes"><ul>
-<li>tested specifically on augmented image states</li>
-</ul>
-</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
-
-### RE3 review
-
-<img src="attachements/re3_results.png" alt="" style="width: 1000px; object-fit: fill">
+# Fast Task Adaptation Benchmarks
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
 
-- A general approach for fast task adaptation is to incorporate extra task-agnostic data 
-- One approach describes a pre-training and fine-tuning process - URLB
-- Second approach is to utilize an auxiliary exploration data and treat is as an offline RL problem - ExORL
+- A general approach for fast task adaptation is to incorporate extra task-agnostic data <br ></br>
+- One approach describes unsupervised Pre-training and a fine-tuning process <br ></br>
+- Second approach is to utilize an auxiliary exploration data and treat is as an offline RL problem
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
-#### URLB
-- pre-train a policy on unsupervised data, using only an exploration reward, for 2M steps
-- fine-tune the policy on the actual task, using 100K steps
+#### Unsupervised Pre-training
+
+- Proposed as a way to tackle sample efficiency
+	- Unlike in CV and NLP, remains a challenge in RL <br ></br>
+- The environment is the same <br ></br>
+- Instead of a task reward we can use an exploration reward <br ></br>
+- Policy is later finetuned with the task specific reward
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
+#### Offline RL
+
+- A sub-field in RL where we constraint the agent in learning a policy without interacting with an environment. <br ></br>
+- The use of an isolated dataset brings many challenges for good RL optimization <br ></br>
+- considered a pre-requisite for RL adoption in many fields.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
+#### Let's try both!
+- Let's describe two benchmarks tarted  at these approaches
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Fast Task Adaptation Benchmarks
+#### Unsupervised Reinforcement Learning Benchmark (URLB)
+- Pre-train a policy on unsupervised data, using only an exploration reward, for 2M steps <br ></br>
+- Fine-tune the policy on the actual task, using 100K steps <br ></br>
 - The benchmark tries to establish a comparison of algorithms for transferring unsupervised exploration to specific tasks
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
 #### URLB
@@ -342,64 +332,65 @@ Pre-Training - URLB SOTA - Ours 10K
 
 <img src="attachements/urlb_tasks.png" alt="" style="width: 1000px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
 #### URLB
 
 <img src="attachements/1708853821_grim.png" alt="" style="object-fit: scale-down">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
 #### URLB setup drawbacks
 
 -   During pre-training, all the collected data is discarded.
-	-   We will refer to it as the Unsupervised Exploration Buffer (UEB)
+	-   We will refer to it as the Unsupervised Exploration Buffer (UEB) <br ></br>
 -   At the end of pre-training, the policy is trained to reach the horizon of explored data. (task dependent)
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
-#### ExORL
-- Collect unsupervised data, possibly directed by exploration (2-10M steps)
-- Assuming a simple reward function, re-label the reward to be the target task reward
+#### Exploration Offline Reinforcement Learning (ExORL)
+- Collect unsupervised data, possibly directed by exploration (2-10M steps) <br ></br>
+- Assuming a simple reward function, re-label the reward to be the target task reward <br ></br>
 - Solve the task using only the re-labeled dataset
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
 #### ExORL
 
-- The benchmark works on the same environments and tasks
-- Only skips state based observations and works only on pixels
-- Same exploration algorithms are used to collect the offline dataset
+- The benchmark works on the same environments and tasks <br ></br>
+- Only skips state based observations and works only on pixels <br ></br>
+- Same exploration algorithms are used to collect the offline dataset <br ></br>
 - A few Offline RL algorithms are also compared
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
 #### ExORL drawbacks
 - Assumes a simple reward function, which allows data re-labeling
-	- Not realistic in numerous applications
+	- Not realistic in numerous applications <br ></br>
 - The performance on most tasks is still lacking
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
 #### Why not both?
 - Incorporate offline data during task fine-tuning!
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Exploration Buffer + Reward Model
 
--   We propose to recycle the exploration data using a RM `$R(s,a)$`.
+-   We propose to recycle the exploration data using a RM `$R(s,a)$`. <br ></br>
 -   During fine-tuning:
-    -   While collecting task data, we sample a batch to train the model:
+    - While collecting task data, we sample a batch to train the model:
         -   sampled online data: train the RM.
         -   sampled UEB: infer the task reward using the RM
-    -   Data is collected only if we sample online data.
+    - Data is collected only if we sample online data.
+    - Additional Offline RL considerations over
 </div>
 
 <aside class="notes"><ul>
@@ -407,28 +398,34 @@ Pre-Training - URLB SOTA - Ours 10K
 <li>During training, we learn a reward model <code>$R(s,a)$</code> and apply it on data from the UEB</li>
 <li>Further improve efficiency by collecting data only after sampling from the online replay buffer</li>
 <li>Testing additional approach</li>
+<li>offline considerations are <ul>
+<li>increasing offline sampling at first</li>
+<li>layer-norm</li>
+<li>continue after stopping data collection</li>
+</ul>
+</li>
 </ul>
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="has-light-background drop" data-background-color="#f0f0f0" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Exploration Buffer + Reward Model
 #### Setup
 
 <split even>
-<img src="attachements/baseline_diag.png" alt="" style="width: 350px; object-fit: fill">
+<img src="attachements/baseline_diag.png" alt="" style="width: 500px; object-fit: fill">
 
-<img src="attachements/buffer_aug_diag_v2.png" alt="" style="width: 350px; object-fit: fill">
+<img src="attachements/buffer_aug_diag_v2.png" alt="" style="width: 500px; object-fit: fill">
 
 </split>
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Exploration Buffer + Reward Model
 #### Pixels
 
 <img src="attachements/urlb_buffered_rm_pixels_bars.png" alt="" style="width: 1000px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### World Models
 
@@ -436,18 +433,31 @@ Pre-Training - URLB SOTA - Ours 10K
     -   Train the world model using the UEB
     -   During fine-tuning:
         -   Continue WM fine-tuning, with the correct reward
-        -   Train a policy using DreamerV3
+        -   Train a policy using DreamerV3<br ></br>
+- Can serve as a compression of past experience <br ></br> 
+<br ></br>
 -   Was later demonstrated in another work
 	- Current SOTA on URLB, we refer to as DreamerMPC
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### World Models - Dreamer
 #### Dreamer
 
 <img src="attachements/dreamerv3.png" alt="" style="width: 1000px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### World Models - DreamerMPC+
+
+- Based on current SOTA on URLB using World Models <br ></br>
+- Additionally applying previously presented concepts:
+	- Mixed Data sampling, using the exploration buffer
+	- Faster network updates
+	- Additional offline RL considerations <br ></br>
+- Showed significant improvement in results (figures later)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Expert Demonstrations
 #### Setup
@@ -460,7 +470,7 @@ Pre-Training - URLB SOTA - Ours 10K
     -   (Instead of the 100K of URLB)
 -   We test this setup using the methods described here
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Expert Demonstrations
 #### Experiments
@@ -468,16 +478,18 @@ Pre-Training - URLB SOTA - Ours 10K
 -   Reward Model
     -   Keep UEB and use the RM when sampling it
     -   Finetune the exploration policy 
+	<br ></br>
 -   DreamerMPC (MURLB)
-    -   Current SOTA on URLB using World model
-    -   During pre-training, train the world model
-    -   Fine-tune the policy with the world model on the task
+    -   Current SOTA on URLB using World Model
+    -   During pre-training, train the World Model
+    -   Fine-tune the policy with the World Model on the task
+	<br ></br>
 -   DreamerMPC+
 	-  Based on MURLB
     -   Use the UEB during finetuning
 	- Additional OfflineRL considerations
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Expert Demonstrations
 #### 100K vs Reward Model
@@ -487,7 +499,7 @@ Pre-Training - URLB SOTA - Ours 10K
 	
 <img src="attachements/paper_bars.png" alt="" style="object-fit: scale-down">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Expert Demonstrations
 #### URLB SOTA (DreamerMPC) vs DreamerMPC+
@@ -504,7 +516,27 @@ Pre-Training - URLB SOTA - Ours 10K
 | Quadruped Jump     | 449        | 539         | *915*          |
 | Normalized Average | 1.0        | 1.4         | *1.68*         |
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 1024px; width: 768px; min-height: 1024px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Demos
+
+#### Fast Task Adaptation
+Exploration - URLB SOTA - Ours 10K <br ></br>
+<img src="attachements/concatenated_3.gif" alt="" style="width: 600px; object-fit: fill">
+
+<img src="attachements/quad_pre.gif" alt="" style="width: 600px; object-fit: fill">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Future Work
+
+- We would like to remove the necessity of keeping the exploration buffer
+	- Each task needs to train using the whole exploration buffer <br ></br>
+- Given an exploration buffer, we argue it should be possible to learn the task only using an offline subset the GT reward 
+	- Without online interactions 
+	- Can be a path towards few-shot RL
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 # Thank You!
 </div></script></section><section  data-markdown><script type="text/template">
@@ -618,7 +650,7 @@ Pre-Training - URLB SOTA - Ours 10K
       // options from URL query string
       var queryOptions = Reveal().getQueryHash() || {};
 
-      var options = extend(defaultOptions, {"width":768,"height":1024,"margin":0.04,"controls":true,"progress":true,"slideNumber":true,"transition":"slide","transitionSpeed":"default"}, queryOptions);
+      var options = extend(defaultOptions, {"width":1920,"height":1080,"margin":0.04,"controls":true,"progress":true,"slideNumber":true,"transition":"slide","transitionSpeed":"default"}, queryOptions);
     </script>
 
     <script>
