@@ -171,7 +171,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 - MDP definitions
 - RL objective
 - Q-Learning
-- Offline RL
+
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -234,7 +234,8 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 
 -   Sparse reward environments is challenging for optimization
 -   We can add an auxiliary reward to facilitate exploration
--   Penalize already visited states
+-   Penalize already visited states <br ></br>
+
 <img src="attachements/rl_ir.png" alt="" style="object-fit: scale-down">
 </div>
 
@@ -309,7 +310,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 
 ### Fast Task Adaptation Benchmarks
 #### Let's try both!
-- Let's describe two benchmarks tarted  at these approaches
+- Let's describe two benchmarks testing these approaches
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -362,7 +363,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 #### ExORL
 
 - The benchmark works on the same environments and tasks <br ></br>
-- Only skips state based observations and works only on pixels <br ></br>
+- Focuses only on Pixel based observations (images) <br ></br>
 - Same exploration algorithms are used to collect the offline dataset <br ></br>
 - A few Offline RL algorithms are also compared
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
@@ -379,6 +380,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Fast Task Adaptation Benchmarks
 #### Why not both?
 - Incorporate offline data during task fine-tuning!
+<img src="attachements/why-not-both-why-not.gif" alt="" style="object-fit: scale-down">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -390,7 +392,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
         -   sampled online data: train the RM.
         -   sampled UEB: infer the task reward using the RM
     - Data is collected only if we sample online data.
-    - Additional Offline RL considerations over
+    - Additional Offline RL considerations
 </div>
 
 <aside class="notes"><ul>
@@ -455,7 +457,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 	- Mixed Data sampling, using the exploration buffer
 	- Faster network updates
 	- Additional offline RL considerations <br ></br>
-- Showed significant improvement in results (figures later)
+- Showed significant improvement in results
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
