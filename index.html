@@ -89,8 +89,8 @@
       <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-### *Unsupervised Reinforcement Learning for Fast Novel Task Adaptation* <br ></br> 
-#### And the accompanying paper: A Demonstration is Worth a Million Exploration Steps?
+## *Unsupervised Reinforcement Learning for Fast Novel Task Adaptation* <br ></br> 
+### And the accompanying paper: A Demonstration is Worth a Million Exploration Steps?
 
 <br ></br>
 Daniel Khapun <br ></br>
@@ -127,14 +127,14 @@ Goal is to maximize accumulated reward
 ### Reinforcment Learning
 #### Achivements 
 
-<img src="attachements/gettyimages-515343878.webp" alt="" style="object-fit: scale-down">
+<img src="attachements/gettyimages-515343878.webp" alt="" style="width: 1000px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcment Learning
 #### Achivements 
 
-<img src="attachements/chat-gpt-header.jpg" alt="" style="object-fit: scale-down">
+<img src="attachements/chat-gpt-header.jpg" alt="" style="width: 1000px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -142,9 +142,10 @@ Goal is to maximize accumulated reward
 #### Limitations
 
 
+<br ></br>
 - It's data hungry
-	- Cannot reuse models/data from similar environments
-- Hard optimization - distributional shift during training
+	- Cannot reuse models/data from similar environments <br ></br>
+- Hard optimization - distributional shift during training <br ></br>
 - Hard to specify a reward function
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
@@ -178,31 +179,38 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Markov Decision Process
 #### MDP
 
-- MDP = < S, T, A, R >
-- S = state
-- T = transition `$T: S\times A \rightarrow S$`
-- A = action (continuous or discrete)
+<br ></br>
+- MDP = < S, T, A, R > <br ></br>
+- S = state <br ></br>
+- T = transition `$T: S\times A \rightarrow S$` <br ></br>
+- A = action (continuous or discrete) <br ></br>
 - R = reward `$R: S\times A \rightarrow \mathbb{R}$`
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### RL objective
 
-- The goal is to find a policy `$\pi$` that maximizes the expected discounted reward `$\mathcal{R}=\mathbb{E}_{\tau\sim\pi}\left[\sum_{t=0}^T\gamma^tr_t\right]$`
+<br ></br>
+- The goal is to find a policy `$\pi$` that maximizes the expected discounted reward `$\mathcal{R}=\mathbb{E}_{\tau\sim\pi}\left[\sum_{t=0}^T\gamma^tr_t\right]$` <br ></br>
 -   Additional definitions:
     - `$Q^\pi(s,a)=\mathbb{E}_{\tau\sim\pi}\left[\sum_{t=0}^T\gamma^tr_t|s_0=s,a_0=a\right]$`
-    - `$V^\pi(s)=\mathbb{E}_{\tau\sim\pi}\left[\sum_{t=0}^T\gamma^tr_t|s_0=s\right]$`
+    - `$V^\pi(s)=\mathbb{E}_{\tau\sim\pi}\left[\sum_{t=0}^T\gamma^tr_t|s_0=s\right]$` <br ></br>
 -   Using these definitions we can define the optimal policy as: 
     - `$\pi(s)=argmax_a Q^\pi(s,a)$`
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+</div>
+
+<aside class="notes"><ul>
+<li>hard planning problem</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Q-Learning
-
+<br ></br>
 -   An approach to find the optimal policy is to look at the bellman equation:
-    -   `$Q(s_t,a_t) = \mathbb{E}_{s'\sim p(s'|s,a)}[r_{t+1}+\gamma Q(s',a')]$`
+    -   `$Q(s_t,a_t) = \mathbb{E}_{s'\sim p(s'|s,a)}[r_{t+1}+\gamma Q(s',a')]$` <br ></br>
 -   Instead if learning `$\pi$` directly, we will learn the Q function, where the loss is:
-    - `$||{Q_*(s_t,a_t) - r_{t+1}+\gamma Q(s',a')}||^2$`
+    - `$||{Q_*(s_t,a_t) - r_{t+1}+\gamma Q(s',a')}||^2$` <br ></br>
 -   This can be easily calculated from batches of `$(s,a,r,s')$` batches
 </div>
 
@@ -218,9 +226,10 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Deep Deterministic Policy Gradient
 #### (DDPG)
 
--   A variation of Q-Learning which supports continuous actions
--   Introduces an additional policy network `$\pi_\theta$` which is trained to maximize the Q network
--   This is the basic RL algorithm which is used in this work
+-   A variation of Q-Learning which supports continuous actions <br ></br>
+-   Introduces an additional policy network `$\pi_\theta$` which is trained to maximize the Q network <br ></br>
+-   This is the basic RL algorithm which is used in this work <br ></br>
+- Training by batches of <s, a, r, s'>
 </div>
 
 <aside class="notes"><ul>
@@ -240,9 +249,20 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 </div>
 
 <aside class="notes"><ul>
-<li>Problem with sparse  reward is that most trajectories get 0 reward</li>
+<li>Problem with sparse  reward is that most trajectories get 0 reward<ul>
+<li>A way to create the intrinsic reward will be to learn the next observation</li>
+</ul>
+</li>
 </ul>
 </aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Reinforcment Learning
+
+#### Exploration vs Exploitation
+
+<img src="attachements/montezuma.gif" alt="" style="object-fit: scale-down">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Reinforcment Learning
@@ -272,7 +292,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 
 ### RND review
 
-<img src="attachements/rnd_results.png" alt="" style="width: 1000px; object-fit: fill">
+<img src="attachements/rnd_results.png" alt="" style="width: 1200px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -282,6 +302,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 
 ### Fast Task Adaptation Benchmarks
 
+<br ></br>
 - A general approach for fast task adaptation is to incorporate extra task-agnostic data <br ></br>
 - One approach describes unsupervised Pre-training and a fine-tuning process <br ></br>
 - Second approach is to utilize an auxiliary exploration data and treat is as an offline RL problem
@@ -291,6 +312,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Fast Task Adaptation Benchmarks
 #### Unsupervised Pre-training
 
+<br ></br>
 - Proposed as a way to tackle sample efficiency
 	- Unlike in CV and NLP, remains a challenge in RL <br ></br>
 - The environment is the same <br ></br>
@@ -302,10 +324,16 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Fast Task Adaptation Benchmarks
 #### Offline RL
 
+<br ></br>
 - A sub-field in RL where we constraint the agent in learning a policy without interacting with an environment. <br ></br>
 - The use of an isolated dataset brings many challenges for good RL optimization <br ></br>
 - considered a pre-requisite for RL adoption in many fields.
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+</div>
+
+<aside class="notes"><ul>
+<li>learn to play games from youtube videos, can be better then all</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Fast Task Adaptation Benchmarks
@@ -316,6 +344,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 
 ### Fast Task Adaptation Benchmarks
 #### Unsupervised Reinforcement Learning Benchmark (URLB)
+<br ></br>
 - Pre-train a policy on unsupervised data, using only an exploration reward, for 2M steps <br ></br>
 - Fine-tune the policy on the actual task, using 100K steps <br ></br>
 - The benchmark tries to establish a comparison of algorithms for transferring unsupervised exploration to specific tasks
@@ -345,6 +374,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Fast Task Adaptation Benchmarks
 #### URLB setup drawbacks
 
+<br ></br>
 -   During pre-training, all the collected data is discarded.
 	-   We will refer to it as the Unsupervised Exploration Buffer (UEB) <br ></br>
 -   At the end of pre-training, the policy is trained to reach the horizon of explored data. (task dependent)
@@ -353,6 +383,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 
 ### Fast Task Adaptation Benchmarks
 #### Exploration Offline Reinforcement Learning (ExORL)
+<br ></br>
 - Collect unsupervised data, possibly directed by exploration (2-10M steps) <br ></br>
 - Assuming a simple reward function, re-label the reward to be the target task reward <br ></br>
 - Solve the task using only the re-labeled dataset
@@ -371,6 +402,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 
 ### Fast Task Adaptation Benchmarks
 #### ExORL drawbacks
+<br ></br>
 - Assumes a simple reward function, which allows data re-labeling
 	- Not realistic in numerous applications <br ></br>
 - The performance on most tasks is still lacking
@@ -385,14 +417,22 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
+### Fast Task Adaptation Benchmarks
+#### Contributions
+<br ></br>
+- Exploration + Reward Model <br ></br>
+- DraemerMPC+
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
 ### Exploration Buffer + Reward Model
 
 -   We propose to recycle the exploration data using a RM `$R(s,a)$`. <br ></br>
 -   During fine-tuning:
     - While collecting task data, we sample a batch to train the model:
         -   sampled online data: train the RM.
-        -   sampled UEB: infer the task reward using the RM
-    - Data is collected only if we sample online data.
+        -   sampled UEB: infer the task reward using the RM <br ></br>
+    - Data is collected only if we sample online data. <br ></br>
     - Additional Offline RL considerations
 </div>
 
@@ -426,12 +466,13 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Exploration Buffer + Reward Model
 #### Pixels
 
-<img src="attachements/urlb_buffered_rm_pixels_bars.png" alt="" style="width: 1000px; object-fit: fill">
+<img src="attachements/urlb_buffered_rm_pixels_bars.png" alt="" style="width: 1200px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### World Models
 
+<br ></br>
 -   Another opportunity to leverage the UEB:
     -   Train the world model using the UEB
     -   During fine-tuning:
@@ -447,7 +488,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### World Models - Dreamer
 #### Dreamer
 
-<img src="attachements/dreamerv3.png" alt="" style="width: 1000px; object-fit: fill">
+<img src="attachements/dreamerv3.png" alt="" style="width: 1200px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -467,12 +508,17 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 <img src="attachements/expert-clipart-man_clipart2.png" alt="" style="width: 100px; object-fit: fill">
 
 
--   We want to further remove reliance on online data acquisition.
--   We Propose to use few expert demonstrations 
+-   We want to further remove reliance on online data acquisition. <br ></br>
+-   We Propose to use few expert demonstrations  <br ></br>
 -   given 4 expert demos, use 10K additional online data
-    -   (Instead of the 100K of URLB)
+    -   (Instead of the 100K of URLB) <br ></br>
 -   We test this setup using the methods described here
-</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+</div>
+
+<aside class="notes"><ul>
+<li>why BC is not the answer</li>
+</ul>
+</aside></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 ### Expert Demonstrations
@@ -500,7 +546,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 -   We evaluate at 10K online steps VS 100K on URLB baseline
 	- 4 Demos - 2K from the 10K steps are expert demonstrations
 	
-<img src="attachements/paper_bars.png" alt="" style="object-fit: scale-down">
+<img src="attachements/paper_bars.png" alt="" style="width: 1200px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
