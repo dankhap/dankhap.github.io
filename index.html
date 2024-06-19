@@ -394,7 +394,7 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 #### ExORL
 
 - The benchmark works on the same environments and tasks <br ></br>
-- Focuses only on Pixel based observations (images) <br ></br>
+- Focuses only on state based observations (vectors of true state) <br ></br>
 - Same exploration algorithms are used to collect the offline dataset <br ></br>
 - A few Offline RL algorithms are also compared
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
@@ -466,7 +466,18 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 ### Exploration Buffer + Reward Model
 #### Pixels
 
-<img src="attachements/urlb_buffered_rm_pixels_bars.png" alt="" style="width: 1200px; object-fit: fill">
+<img src="attachements/urlb_buffered_rm_states_bars_walker.png" alt="" style="width: 1200px; object-fit: fill">
+
+Fine-tuning for 100K steps on pixels
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Exploration Buffer + Reward Model
+#### Pixels
+
+<img src="attachements/urlb_buffered_rm_states_bars_quad.png" alt="" style="width: 1200px; object-fit: fill">
+
+Fine-tuning for 100K steps on pixels
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -546,7 +557,17 @@ Vanilla DDPG - URLB SOTA - Ours 10K <br ></br>
 -   We evaluate at 10K online steps VS 100K on URLB baseline
 	- 4 Demos - 2K from the 10K steps are expert demonstrations
 	
-<img src="attachements/paper_bars.png" alt="" style="width: 1200px; object-fit: fill">
+<img src="attachements/paper_bars_walker.png" alt="" style="width: 1200px; object-fit: fill">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Expert Demonstrations
+#### 100K vs Reward Model
+
+-   We evaluate at 10K online steps VS 100K on URLB baseline
+	- 4 Demos - 2K from the 10K steps are expert demonstrations
+	
+<img src="attachements/paper_bars_quad.png" alt="" style="width: 1200px; object-fit: fill">
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -588,8 +609,7 @@ Exploration - URLB SOTA - Ours 10K <br ></br>
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 1080px; width: 1920px; min-height: 1080px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 # Thank You!
-</div></script></section><section  data-markdown><script type="text/template">
-</script></section></div>
+</div></script></section></div>
     </div>
 
     <script src="dist/reveal.js"></script>
