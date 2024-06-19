@@ -10,26 +10,28 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nodejs
-    container_name: nodejs
     restart: unless-stopped
     env_file: .env
     environment:
       - MONGO_USERNAME=$MONGO_USERNAME
     ports:
-      - "80:1948"
+      - "1947:1947"
     labels:
       - "app=githubio"
       - "traefik.http.routers.githubio.rule=Host(`slides.lenindady.win`)"
       - "traefik.http.routers.githubio.tls.certresolver=letsencrypt"
       - "traefik.http.routers.githubio.entrypoints=web-secure"
-      - "traefik.http.services.githubio-service.loadbalancer.server.port=1948"
+      - "traefik.http.services.githubio-service.loadbalancer.server.port=1947"
 
 
     volumes:
       - .:/home/node/app
-      # - node_modules:/home/node/app/node_modules
+      - node_modules:/home/node/app/node_modules
     networks:
       - traefik_proxy
     command: npx reveal-notes-server
+
+volumes:
+  node_modules:
+
 
